@@ -1,6 +1,6 @@
 import { goGetProducts, goGetProduct, goPostProduct , goDeleteProduct, goPatchProduct} from "../models/database.js";
 
-export default{
+export default {
     getProducts: async(req,res)=>{
         res.send(await goGetProducts())
     },
@@ -39,6 +39,3 @@ export default{
         res.send(await goGetProducts())
     }
 }
-    // addProd: async(req,res)=>{
-    //     res.send(await goPostProduct())
-    // }
