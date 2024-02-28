@@ -1,14 +1,38 @@
 import { goGetProducts, goGetProduct, goPostProduct, goDeleteProduct, goPatchProduct, goGetUsers, goGetUser,goPostUser ,goDeleteUser, goPatchUser } from "../models/database.js";
 import bcrypt from 'bcrypt'
-
+const secretKey = process.env.SECRET_KEY
 export default {
 //products table functions
-    getProducts: async(req,res)=>{
-        res.send(await goGetProducts())
+    getProducts: async (req, res) => {
+        try {
+            const products = await goGetProducts();
+            res.send(products);
+        } catch (error) {
+            console.error("Error occurred while fetching products:", error);
+            res.status(500).json({ msg: "Internal Server Error" });
+        }
     },
 
-    getProduct: async(req,res)=>{
-        res.send(await goGetProduct(+req.params.id))
+    getProduct: async (req, res) => {
+        try {
+            const productId = +req.params.id; // Convert the id to a number
+            const product = await goGetProduct(productId);
+            if (!product) {
+                // If product is not found, throw a UserError
+                throw new UserError(`Product with ID ${productId} not found`);
+            }
+            res.send(product);
+        } catch (error) {
+            console.error("Error occurred while fetching product:", error);
+            // Check if it's a user error or a server error
+            if (error instanceof UserError) {
+                // User error (e.g., invalid input)
+                res.status(400).json({ msg: error.message }); // Bad Request
+            } else {
+                // Server error
+                res.status(500).json({ msg: "Internal Server Error" }); // Internal Server Error
+            }
+        }
     },
     
     postProduct: async(req,res)=>{
@@ -49,15 +73,22 @@ export default {
         res.send(await goGetUser(+req.params.id))
     },
 
-    postUsers: async(req,res)=>{
-        const { firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile } = req.body
-        bcrypt.hash(userPass, 10, async(err, hash)=> {
-            if(err) throw err
-            await goPostUser(firstName, lastName, userAge, Gender, userRole, emailAdd, hash, userProfile)
+    postUsers: async (req, res) => {
+        const { firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile } = req.body;
+        bcrypt.hash(userPass, 10, async (err, hash) => {
+            if (err) throw err;
+            await goPostUser(firstName, lastName, userAge, Gender, userRole, emailAdd, hash, userProfile);
+    
+            // Generate JWT token
+            const token = jwt.sign({ email: emailAdd }, secretKey, { expiresIn: '1h' }); // Adjust expiry as needed
+    
+            // Set the token in a cookie
+            res.cookie('token', token, { httpOnly: true });
+    
             res.send({
                 msg: "You have created an account"
-            })
-        })
+            });
+        });
     },
 
     deleteUser: async(req,res)=>{

@@ -1,17 +1,25 @@
 import  {pool}  from "../config/config.js"
 //Products table
-const goGetProducts= async()=>{
-    const[result] = await pool.query(`
-    SELECT * FROM products`)
-    return result
+const goGetProducts = async () => {
+    const [result] = await pool.query(`SELECT * FROM products`);
+    if (!result || result.length === 0) {
+        throw new Error('No products found');
+    }
+    return result;
 }
 
-const goGetProduct= async(id)=>{
-    const[result] = await pool.query(`
-    SELECT * 
-    FROM products
-    WHERE prodID = ?`,[id])
-    return result
+const goGetProduct = async (id) => {
+    // Validate input
+    if (!id || isNaN(id)) { // Check if id is empty or not a number
+        throw new UserError('Invalid product ID provided');
+    }
+
+    const [result] = await pool.query(`
+        SELECT * 
+        FROM products
+        WHERE prodID = ?`, [id]);
+
+    return result;
 }
 
 const goPostProduct= async(prod_name, quantity, amount, category, ProdURL)=>{
