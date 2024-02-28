@@ -1,5 +1,5 @@
 import  {pool}  from "../config/config.js"
-
+//Products table
 const goGetProducts= async()=>{
     const[result] = await pool.query(`
     SELECT * FROM products`)
@@ -37,7 +37,7 @@ const goPatchProduct = async(prod_name, quantity, amount, category,ProdURL,id)=>
     `,[prod_name, quantity, amount, category,ProdURL,id])
     return goGetProducts()
 }
-
+//Users table 
 const goGetUsers= async()=>{
     const [result] = await pool.query(`
     SELECT * FROM users`)
