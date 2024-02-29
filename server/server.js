@@ -5,7 +5,6 @@ import cors from 'cors'
 import productsRouter from '../server/routes/products.js';
 import usersRouter from '../server/routes/users.js';
 import cookieParser from 'cookie-parser'
-// import jwt from 'jsonwebtoken'
 
 config()
 

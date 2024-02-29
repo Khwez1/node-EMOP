@@ -1,5 +1,6 @@
 import { goGetProducts, goGetProduct, goPostProduct, goDeleteProduct, goPatchProduct, goGetUsers, goGetUser,goPostUser ,goDeleteUser, goPatchUser } from "../models/database.js";
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 const secretKey = process.env.SECRET_KEY
 export default {
 //products table functions
@@ -8,7 +9,7 @@ export default {
             const products = await goGetProducts();
             res.send(products);
         } catch (error) {
-            console.error("Error occurred while fetching products:", error);
+            console.error("Error occurred while fetching products:");
             res.status(500).json({ msg: "Internal Server Error" });
         }
     },
@@ -17,28 +18,22 @@ export default {
         try {
             const productId = +req.params.id; // Convert the id to a number
             const product = await goGetProduct(productId);
-            if (!product) {
-                // If product is not found, throw a UserError
-                throw new UserError(`Product with ID ${productId} not found`);
-            }
             res.send(product);
         } catch (error) {
-            console.error("Error occurred while fetching product:", error);
-            // Check if it's a user error or a server error
-            if (error instanceof UserError) {
-                // User error (e.g., invalid input)
-                res.status(400).json({ msg: error.message }); // Bad Request
-            } else {
-                // Server error
-                res.status(500).json({ msg: "Internal Server Error" }); // Internal Server Error
-            }
+            console.error("Error occurred while fetching product");
+                res.status(404).json({ msg: "product was not found" }); 
         }
     },
     
     postProduct: async(req,res)=>{
-        const { prod_name, quantity, amount, category, prodUrl } = req.body;
-        await goPostProduct(prod_name, quantity, amount, category, prodUrl);
-        res.send(await goGetProducts())
+        try{
+            const { prod_name, quantity, amount, category, prodUrl } = req.body;
+            await goPostProduct(prod_name, quantity, amount, category, prodUrl);
+            res.send(await goGetProducts())
+        } catch (error){
+            console.error("Error adding product");
+                res.status(404).json({msg: "Couldn't add Product"})
+        }
     },
 
     deleteProduct: async(req,res)=>{
@@ -119,5 +114,5 @@ export default {
         await goPatchUser(firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile, +req.params.id)
         
         res.send(await goGetUsers())
-    },
+    }, 
 }

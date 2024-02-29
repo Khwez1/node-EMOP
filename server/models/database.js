@@ -3,22 +3,22 @@ import  {pool}  from "../config/config.js"
 const goGetProducts = async () => {
     const [result] = await pool.query(`SELECT * FROM products`);
     if (!result || result.length === 0) {
-        throw new Error('No products found');
+        throw error();
     }
     return result;
 }
 
 const goGetProduct = async (id) => {
     // Validate input
-    if (!id || isNaN(id)) { // Check if id is empty or not a number
-        throw new UserError('Invalid product ID provided');
-    }
-
+    
     const [result] = await pool.query(`
-        SELECT * 
-        FROM products
-        WHERE prodID = ?`, [id]);
-
+    SELECT * 
+    FROM products
+    WHERE prodID = ?`, [id]);
+    // error handling, checking whether the id param matches the prodID
+    if (!id || isNaN(id) || id>result ) {
+        throw error();
+    }
     return result;
 }
 
@@ -26,7 +26,10 @@ const goPostProduct= async(prod_name, quantity, amount, category, ProdURL)=>{
     const [product] = await pool.query(`
         INSERT INTO products(prodName, quantity, amount, category, ProdUrl) VALUES (?,?,?,?,?)
     `,[prod_name, quantity, amount, category, ProdURL])
-    return goGetProducts(product.InsertId)
+    if (!prod_name || !quantity || !amount || !category || !ProdURL) {
+        throw error();
+    }
+    return goGetProducts()
 }
 
 const goDeleteProduct = async(id)=>{
@@ -34,7 +37,7 @@ const goDeleteProduct = async(id)=>{
         DELETE FROM products
         WHERE prodID = ?
     `,[id])
-    return goGetProducts(product.DeleteId)
+    return goGetProducts()
 } 
 
 const goPatchProduct = async(prod_name, quantity, amount, category,ProdURL,id)=>{
@@ -49,6 +52,9 @@ const goPatchProduct = async(prod_name, quantity, amount, category,ProdURL,id)=>
 const goGetUsers= async()=>{
     const [result] = await pool.query(`
     SELECT * FROM users`)
+    if (!result || result.length === 0) {
+        throw error();
+    }
     return result
 }
 
@@ -57,6 +63,9 @@ const goGetUser = async(id)=>{
     SELECT * 
     FROM users
     WHERE userID = ?`,[id])
+    if (!id || isNaN(id) || id>result ) {
+        throw error();
+    }
     return result
 }
 
@@ -65,6 +74,10 @@ const goPostUser = async(firstName, lastName, userAge, Gender, userRole, emailAd
     INSERT INTO users (firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile) 
     VALUES (?,?,?,?,?,?,?,?);
     `,[firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile])
+    if (!firstName || !lastName || !userAge || !Gender || !userRole || !emailAdd || !userPass || !userProfile) {
+        throw error();
+    }
+    return goGetUsers()
 }
 
 const goDeleteUser = async(id)=>{
@@ -72,7 +85,7 @@ const goDeleteUser = async(id)=>{
         DELETE FROM users
         WHERE UserID = ?
     `,[id])
-    return goGetUsers(user.DeleteId)
+    return goGetUsers()
 } 
 
 const goPatchUser = async(firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile, id)=>{
