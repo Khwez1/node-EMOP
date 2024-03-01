@@ -1,4 +1,4 @@
-import { goGetProducts, goGetProduct, goPostProduct, goDeleteProduct, goPatchProduct, goGetUsers, goGetUser,goPostUser ,goDeleteUser, goPatchUser } from "../models/database.js";
+import { goGetProducts, goGetProduct, goPostProduct, goDeleteProduct, goPatchProduct, goGetUsers, goGetUser,goPostUser ,goDeleteUser, goPatchUser, logIn } from "../models/database.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 const secretKey = process.env.SECRET_KEY
@@ -114,5 +114,6 @@ export default {
         await goPatchUser(firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile, +req.params.id)
         
         res.send(await goGetUsers())
-    }, 
+    },
+    
 }

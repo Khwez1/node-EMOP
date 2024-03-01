@@ -97,4 +97,11 @@ const goPatchUser = async(firstName, lastName, userAge, Gender, userRole, emailA
     return goGetUsers()
 }
 
-export { goGetProducts,goGetProduct,goPostProduct,goDeleteProduct,goPatchProduct,goGetUsers,goGetUser,goPostUser,goDeleteUser,goPatchUser }
+const logIn = async(emailAdd)=> {
+    const [[{userPass}]] = await pool.query(`
+    SELECT userPass FROM users WHERE emailAdd = ?
+    `, [emailAdd])
+    return userPass
+}
+
+export { goGetProducts,goGetProduct,goPostProduct,goDeleteProduct,goPatchProduct,goGetUsers,goGetUser,goPostUser,goDeleteUser,goPatchUser,logIn }

@@ -5,6 +5,8 @@ import cors from 'cors'
 import productsRouter from '../server/routes/products.js';
 import usersRouter from '../server/routes/users.js';
 import cookieParser from 'cookie-parser'
+import loginRoute from './routes/login.js';
+import auth from './middleware/verifyJwt.js';
 
 config()
 
@@ -32,6 +34,8 @@ app.use(cookieParser())
 app.use('/products', productsRouter)
 
 app.use('/users', usersRouter)
+
+app.use('/login', auth, loginRoute)
 
 app.listen (PORT,()=>{
     console.log(`this is listening on http://localhost:${PORT}`)
