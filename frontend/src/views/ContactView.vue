@@ -1,123 +1,77 @@
-
-
 <template>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Honk&family=Rubik+Bubbles&display=swap" rel="stylesheet">
-    <div>
-      <nav class="navbar fixed-top">
-      
-      </nav>
-      <main id="oi">
-       
-        <section class="mb-1">
-         
-          <h2 class="h1-responsive font-weight-bold text-center my-4">Contact us</h2>
-        
-          <p class="text-center w-responsive mx-auto mb-5">
-            Do you have any questions? Please do not hesitate to contact us directly. Our team will come back to you within
-            a matter of hours to help you.
-          </p>
-  
-          <div class="row">
-            <!-- Grid column -->
-            <div class="col-md-9 mb-md-0 mb-5">
-              
-                <form action="https://formspree.io/f/mwkdzevr" method="POST" class="container" id="form">
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">First Name </label>
-                            <input type="Fname" name="first_name" class="form-control" id="Inputfirstname" required aria-describedby="Fname">
-                            <label for="exampleInputEmail1" class="form-label">Last Name</label>
-                            <input type="lname" name="surname" class="form-control" id="Inputlastname" required aria-describedby="emailHelp">
-                            <label for="exampleInputEmail1" class="form-label">Email address</label>
-                            <input type="email" name="email" class="form-control" id="InputEmail1" required aria-describedby="emailHelp">
-                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label id="message"  for="exampleInputmessage" class="form-label">Comments / Questions</label>
-                            <input type="message" name="message" class="form-control" id="exampleInputmessage" required>
-                        </div>
+  <div class="container">
+    <nav class="navbar fixed-top">
+   
+    </nav>
+    <main id="oi">
+      <section class="mb-1">
+        <h2 class="h1-responsive font-weight-bold text-center my-4">Contact us</h2>
+        <p class="text-center w-responsive mx-auto mb-5">
+          Do you have any questions? Please do not hesitate to contact us directly. Our team will come back to you within a matter of hours to help you.
+        </p>
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    
-              </form>
-            </div>
-            <!-- Grid column -->
-  
-            <!-- Grid column -->
-            <div class="col-md-3 text-center">
-              <ul class="list-unstyled mb-0">
-                <!-- Contact information (unchanged) -->
-              </ul>
-            </div>
-            <!-- Grid column -->
+        <div class="row justify-content-center">
+          <div class="col-md-9 mb-md-0 mb-5">
+            <form action="https://formspree.io/f/mwkdzevr" method="POST" id="form">
+              <!-- Form content -->
+              <div class="form-group">
+                <label for="Inputfirstname" class="form-label">First Name</label>
+                <input type="text" name="first_name" class="form-control" id="Inputfirstname" required>
+              </div>
+              <div class="form-group">
+                <label for="Inputlastname" class="form-label">Last Name</label>
+                <input type="text" name="surname" class="form-control" id="Inputlastname" required>
+              </div>
+              <div class="form-group">
+                <label for="InputEmail1" class="form-label">Email address</label>
+                <input type="email" name="email" class="form-control" id="InputEmail1" required>
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputmessage" class="form-label">Comments / Questions</label>
+                <textarea name="message" class="form-control" id="exampleInputmessage" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
           </div>
-        </section>
-        <!-- Section: Contact v.2 -->
-      </main>
-     
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    methods: {
-      submitForm() {
-        // Handle form submission logic here
-        // You can use external libraries like axios for form submission
-        // or send an HTTP request to your server endpoint
-        // Example: axios.post('your-api-endpoint', formData)
-      },
-    },
-  };
-  </script>
-  
-  <style scoped>
-p {
-  color: rgb(255, 255, 255);
-  font-size: 22px;
-  line-height: 0.1;
-   
- 
+        </div>
+      </section>
+    </main>
+  </div>
+</template>
+
+<style scoped>
+.container {
+  max-width: 960px;
+  margin: 0 auto; /* Center the container */
+  padding: 0 15px; /* Add some padding on the sides */
 }
-h2 {
-  color: rgb(255, 255, 255);
-  font-size: 36px;
-  margin-bottom: 30px;
-  margin-top: -3%;
+
+@media (max-width: 768px) {
+  .form-control,
+  .btn {
+    width: 100%;
+    margin-top: 10px;
+    margin-left: 0; /* Override any specific margin settings to ensure full width on small screens */
+  }
+  label {
+    display: block; /* Make sure labels are above inputs on small screens */
+    margin-left: 0;
+    margin-top: 15px;
+  }
+  .form-text {
+    display: block;
+    margin-left: 0;
+    margin-top: 5px;
+  }
 }
-input{
-  margin-left: 16%;
+
+/* Adjustments to other elements for responsiveness */
+p, h2 {
+  padding-left: 15px;
+  padding-right: 15px;
 }
-label{
-  margin-left: 35%;
-  font-weight: bold;
-  
-}
-.btn{
-  margin-left: 35%;
-  margin-top: -18px;
-}
-.form-text{
-  color: white;
-  margin-left: 36%;
-  
-}
-#exampleInputmessage{
-  padding: 3.5%;
-}
-h2{
-   font-family: "Honk", system-ui !important;  
-  font-optical-sizing: auto !important;
-  font-weight: 400 !important;
-  font-size: 50px;
-  font-style: normal !important;
-   
-}
-p{
-  font-family: "Honk", system-ui !important;  
-  font-optical-sizing: auto !important;
-}
-  </style>
-  
+
+/* Existing styles adjusted for responsiveness */
+/* Add any specific styles you need here */
+</style>

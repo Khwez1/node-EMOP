@@ -83,12 +83,45 @@ export default {
   font-family: "Titillium Web", sans-serif;
   font-weight: 300;
   font-style: normal;
-  
-  /* margin-top: 500px */
 }
-h6{
+
+h6 {
   font-family: "Rubik Bubbles", system-ui !important;
   font-weight: 400 !important;
   font-style: normal !important;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .footer {
+    padding: 3% !important; 
+    font-size: medium !important; 
+  }
+
+  h6 {
+    font-size: 1rem !important; 
+  }
+
+  p {
+    font-size: 0.9rem !important; 
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 2% !important; 
+    font-size: small !important;
+    
+  }
+
+  h6 {
+    /* margin-right: 50%; */
+    font-size: 0.8rem !important; 
+  }
+
+  p {
+    /* margin-right: 10%; */
+    font-size: 0.8rem !important; 
+  }
 }
 </style>

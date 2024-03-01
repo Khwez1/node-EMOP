@@ -33,7 +33,7 @@ export default createStore({
   actions: {
     async fetchUsers(context) {
       try{
-        let {results} = (await axios.get(`${Server}users`)).data
+        let results = (await axios.get(`${Server}users`)).data
         if(results) {
           context.commit('setUsers', results)
         }

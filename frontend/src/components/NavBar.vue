@@ -1,13 +1,16 @@
 <template>
-  
-  <nav class="navbar d-flex navbar-expand-lg ">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <router-link class="navbar-brand" to="/">
-        <img href="/" height="120px" width="120px" src="https://i.postimg.cc/d0bpKTM7/R-removebg-preview-1.png" alt="">
+        <img height="120px" width="120px" src="https://i.postimg.cc/d0bpKTM7/R-removebg-preview-1.png" alt="">
       </router-link>
-    
-      <div class="collapse justify-content-end navbar-collapse" id="navbarNav">
-        <div class="navbar-nav KK">
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <div class="navbar-nav ml-auto">
           <router-link class="nav-item nav-link KK" to="/"> HOME</router-link>
           <router-link class="nav-item nav-link KK" to="/about"> ABOUT</router-link>
           <router-link class="nav-item nav-link KK" to="/products">PRODUCTS</router-link>
@@ -26,33 +29,42 @@ export default {
 </script>
 
 <style scoped>
-img{
+img {
   margin-top: -15% !important;
-  /* padding-top: 12%; */
 }
+
 a:hover {
-background-color: rgb(173, 187, 235) !important  ;
-border-radius: 10% !important;
-color: white !important;
+  background-color: rgb(173, 187, 235) !important;
+  border-radius: 10% !important;
+  color: white !important;
 }
-.KK{
+
+.KK {
   font-size: large !important;
-    font-weight: bold !important;
-    float: inline-end;
-    margin-left: 4% !important;
-    /* color: rgb(5, 5, 5); */
-    color: rgba(255, 255, 255, 0.818) !important;
-    font-family: "Rubik Bubbles", system-ui !important;
+  font-weight: bold !important;
+  margin-left: 4% !important;
+  color: rgba(255, 255, 255, 0.818) !important;
+  font-family: "Rubik Bubbles", system-ui !important;
   font-weight: 400 !important;
   font-style: normal !important;
-
 }
 
+.navbar-toggler {
+  border: none;
+  outline: none;
+}
 
+@media (max-width: 768px) {
+  img {
+    margin-top: 0; 
+  }
 
+  .navbar-nav {
+    text-align: center; 
+  }
 
-
-
-
-
+  .KK {
+    margin-left: 0 !important; 
+  }
+}
 </style>

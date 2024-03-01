@@ -31,34 +31,28 @@ export default {
 </script>
 
 <style scoped>
+
 .text {
   color: aliceblue !important;
-  /* background-color: rgba(128, 135, 128, 0.732); */
   padding: 80px !important;
   font-size: xx-large !important;
+}
 
-}#B{
+#B {
   border-radius: 50% !important;
-  margin-left:65PX !important; 
+  margin-left: 65px !important; 
 }
 
 #landingP {
   font-family: "Honk", system-ui !important;  
-  font-optical-sizing: auto !important;
   font-weight: 400 !important;
   font-style: normal !important;
-  font-variation-settings : 
-    "MORF" 15,
-    "SHLN" 40 !important;
-
   background-color: rgb(23, 70, 29) !important;
   font-weight: bold !important;
   font-size: 8.1rem !important; 
   margin-bottom: 3% !important;
   border-radius: 10% !important;
   box-shadow: 0 0 50px rgba(2, 255, 65, 0.301) !important;
-  
-  
 }
 
 .rotate-3d {
@@ -70,5 +64,39 @@ export default {
 
 .rotate-3d:hover {
   transform: perspective(1000px) rotateY(360deg) !important;
+}
+
+
+@media (max-width: 768px) {
+  .text {
+    padding: 40px !important; 
+    font-size: x-large !important; 
+  }
+
+  #landingP {
+    font-size: 4.5rem !important; 
+  }
+
+  #B {
+    margin-left: 0 !important; 
+    height: 120px; 
+    width: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .text {
+    padding: 20px !important;
+    font-size: large !important; 
+  }
+
+  #landingP {
+    font-size: 2.5rem !important; 
+  }
+
+  #B {
+    height: 100px; 
+    width: 100px;
+  }
 }
 </style>

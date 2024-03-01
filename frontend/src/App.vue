@@ -65,9 +65,9 @@ nav {
 
 }
 
-a{
+/* a{
   float: left !important;
-}
+} */
 * nav  { 
   background: rgba(85, 81, 81, 0.804) !important;
     text-align: right !important; 
@@ -108,6 +108,48 @@ img[alt='logo'] {
   /* background-color: #b95842 !important; */
   
 
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+main {
+  padding: 20px;
+}
+
+nav {
+  padding: 20px;
+}
+
+img[alt='logo'] {
+  width: 5rem;
+  margin-top: -50%;
+  aspect-ratio: 1/1;
+}
+
+.nav-item {
+  font-size: large;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.818);
+  font-family: "Rubik Bubbles", system-ui;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  img[alt='logo'] {
+    width: 4rem;
+    margin-top: -30%;
+  }
+
+  nav {
+    padding: 10px;
+  }
+
+  .nav-item {
+    font-size: medium;
+  }
 }
 
 
